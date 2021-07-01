@@ -68,15 +68,17 @@ export default function Items({
 								</tr>
 							))}
 					</tbody>
-					<tfoot>
-						<tr>
-							<td colSpan={4}>
-								<h5 className="text-center">
-									Total: {Number(getTotal()).toFixed(2)}
-								</h5>
-							</td>
-						</tr>
-					</tfoot>
+					{items.length > 0 && (
+						<tfoot>
+							<tr>
+								<td colSpan={4}>
+									<h5 className="text-center">
+										Total: {Number(getTotal()).toFixed(2)}
+									</h5>
+								</td>
+							</tr>
+						</tfoot>
+					)}
 				</table>
 			</div>
 		</>
