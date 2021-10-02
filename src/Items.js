@@ -21,7 +21,7 @@ export const Items = ({ items, deleteItem, setFormState, setShowForm }) => {
   };
 
   return (
-    <ul className="list-group shadow-sm">
+    <ul className="list-group shadow-sm mb-4">
       {!items.length && (
         <li className="list-group-item">
           <h2 className="text-center text-secondary">
