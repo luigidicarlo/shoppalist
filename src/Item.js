@@ -20,7 +20,7 @@ export const Item = ({ item, onEdit, onDelete }) => {
   return (
     <li className="list-group-item">
       <div className="d-flex align-items-center justify-content-between">
-        <h3 className="my-0 h5">{item.name}</h3>
+        <h3 className={`my-0 h5${item.price <= 0 || item.quantity <= 0 ? ' text-danger' : ''}`}>{item.name}</h3>
         <button
           className="btn btn-sm btn-primary"
           onClick={onToggleInfo}

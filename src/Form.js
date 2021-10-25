@@ -59,8 +59,8 @@ export const Form = ({ onSubmit, formState, onChange, resetForm }) => {
             Cancelar
           </button>
         )}
-        <button className="btn btn-success" type="submit">
-          {formState.itemToEdit ? 'Editar' : 'Agregar'}
+        <button className="btn btn-success" type="submit" disabled={formState.name.length <= 0}>
+          {formState.itemToEdit ? "Editar" : "Agregar"}
         </button>
       </div>
     </form>
