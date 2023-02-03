@@ -1,7 +1,7 @@
 {
   "name": "shoppalist",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0-beta",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sweetalert": "^2.1.2",

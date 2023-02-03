@@ -4,9 +4,10 @@ import { IItem } from '../interfaces';
 interface IProps {
 	items: IItem[];
 	setItems: React.Dispatch<React.SetStateAction<IItem[]>>;
+	setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const Header: React.FC<IProps> = ({ items, setItems }) => {
+export const Header: React.FC<IProps> = ({ items, setItems, setModalOpen }) => {
 	const exportList = () => {
 		const rawItems = localStorage.getItem('items');
 
@@ -58,6 +59,8 @@ export const Header: React.FC<IProps> = ({ items, setItems }) => {
 		});
 	};
 
+	const openModal = () => setModalOpen(true);
+
 	return (
 		<header className="bg-blue-500 py-2 flex flex-wrap items-center justify-between text-white mb-3">
 			<h1 className="h3 m-0 pl-2">
@@ -94,8 +97,7 @@ export const Header: React.FC<IProps> = ({ items, setItems }) => {
 					className="text-white mx-2 p-1"
 					style={{ textDecoration: 'none' }}
 					title="Importar lista"
-					data-bs-toggle="modal"
-					data-bs-target="#upload-modal"
+					onClick={openModal}
 				>
 					<i className="fas fa-upload"></i>
 				</button>

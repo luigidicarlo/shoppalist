@@ -19,7 +19,7 @@ export const Form: React.FC<IProps> = ({
 	resetForm,
 }) => {
 	return (
-		<form onSubmit={onSubmit} className="bg-white shadow p-4 rounded mb-8">
+		<form onSubmit={onSubmit} className="bg-white p-4 rounded">
 			<input
 				className={`${inputStyles}`}
 				type="text"
@@ -49,18 +49,18 @@ export const Form: React.FC<IProps> = ({
 				onChange={onChange}
 				placeholder="Precio (Ejemplo: 999999.999)"
 			/>
-			<div className="flex items-center justify-center">
+			<div className={`flex items-center justify-center mt-8${formState.itemToEdit && ' gap-4'}`}>
 				{formState.itemToEdit && (
 					<button
 						type="button"
-						className={`${buttonDangerStyles}`}
+						className={`${buttonDangerStyles} w-1/2`}
 						onClick={resetForm}
 					>
 						Cancelar
 					</button>
 				)}
 				<button
-					className={`${buttonSuccessStyles}`}
+					className={`${buttonSuccessStyles}${formState.itemToEdit && ' w-1/2'}`}
 					type="submit"
 					disabled={formState.name.length <= 0}
 				>

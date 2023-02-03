@@ -16,7 +16,6 @@ export const Item: React.FC<IProps> = ({ item, onEdit, onDelete }) => {
 	};
 
 	const onEditItem = () => {
-		window.scrollTo(0, 0);
 		onEdit(item);
 	};
 

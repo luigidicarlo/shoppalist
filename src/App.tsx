@@ -8,6 +8,8 @@ import { Form } from './components/Form';
 import { FilterForm } from './components/FilterForm';
 import { UploadModal } from './components/UploadModal';
 import { IFormState, IItem } from './interfaces';
+import { buttonSuccessStyles } from './constants/styles';
+import { ItemModal } from './components/ItemModal';
 
 const defaultState = {
 	name: '',
@@ -23,6 +25,8 @@ export const App = () => {
 	const [filteredItems, setFilteredItems] = useState(items);
 	const [filter, setFilter] = useState('');
 	const [formState, setFormState] = useState<IFormState>(defaultState);
+	const [isItemModalOpen, setIsItemModalOpen] = useState(false);
+	const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
 	useEffect(() => {
 		localStorage.setItem('items', JSON.stringify(items));
@@ -63,6 +67,7 @@ export const App = () => {
 		}
 
 		resetForm();
+		setIsItemModalOpen(false);
 	};
 
 	const onChange: React.ChangeEventHandler<HTMLInputElement> = ({ target }) => {
@@ -95,28 +100,47 @@ export const App = () => {
 		}
 	};
 
+	const openItemModal = () => setIsItemModalOpen(true);
+
 	return (
 		<>
-			<Header items={items} setItems={setItems} />
+			<Header
+				items={items}
+				setItems={setItems}
+				setModalOpen={setIsUploadModalOpen}
+			/>
 			<main className="container mx-auto max-w-sm px-2">
-				<div className="card mb-4">
-					<div className="card-body">
-						<Form
-							onSubmit={onSubmit}
-							formState={formState}
-							onChange={onChange}
-							resetForm={resetForm}
-						/>
-					</div>
-				</div>
 				<FilterForm filter={filter} setFilter={setFilter} />
 				<Items
+					setIsItemModalOpen={setIsItemModalOpen}
 					items={filteredItems}
 					deleteItem={deleteItem}
 					setFormState={setFormState}
 				/>
 			</main>
-			<UploadModal setItems={setItems} />
+			<div className="flex items-center justify-center my-6 fixed bottom-4 right-4">
+				<button
+					type="button"
+					className={`${buttonSuccessStyles} rounded-full py-2 px-2 shadow`}
+					onClick={openItemModal}
+					title="Agregar Producto"
+				>
+					<i className="fas fa-plus"></i>
+				</button>
+			</div>
+			<UploadModal
+				setItems={setItems}
+				isOpen={isUploadModalOpen}
+				setIsOpen={setIsUploadModalOpen}
+			/>
+			<ItemModal
+				isOpen={isItemModalOpen}
+				setIsOpen={setIsItemModalOpen}
+				formState={formState}
+				onChange={onChange}
+				onSubmit={onSubmit}
+				resetForm={resetForm}
+			/>
 		</>
 	);
 };

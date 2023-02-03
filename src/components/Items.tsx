@@ -5,12 +5,14 @@ interface IProps {
 	items: IItem[];
 	deleteItem: (itemId: string) => void;
 	setFormState: React.Dispatch<React.SetStateAction<IFormState>>;
+	setIsItemModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Items: React.FC<IProps> = ({
 	items,
 	deleteItem,
 	setFormState,
+	setIsItemModalOpen,
 }) => {
 	const getSubtotal = (item: IItem) => {
 		return Number(item.quantity) * Number(item.price);
@@ -21,6 +23,7 @@ export const Items: React.FC<IProps> = ({
 	};
 
 	const onEdit = (item: IItem) => {
+		setIsItemModalOpen(true);
 		setFormState({
 			name: item.name,
 			quantity: Number(item.quantity) === 0 ? '' : item.quantity,
@@ -30,7 +33,7 @@ export const Items: React.FC<IProps> = ({
 	};
 
 	return (
-		<ul className="mb-4 rounded">
+		<ul className="mt-8 mb-4 rounded">
 			{!items.length && (
 				<li className="flex items-center justify-center">
 					<h2 className="text-2xl font-bold text-center">

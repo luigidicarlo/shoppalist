@@ -5,12 +5,19 @@ import {
 	inputStyles,
 } from '../constants/styles';
 import { IItem } from '../interfaces';
+import { Dialog } from '@headlessui/react';
 
 interface IProps {
 	setItems: React.Dispatch<React.SetStateAction<IItem[]>>;
+	isOpen: boolean;
+	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const UploadModal: React.FC<IProps> = ({ setItems }) => {
+export const UploadModal: React.FC<IProps> = ({
+	setItems,
+	isOpen,
+	setIsOpen,
+}) => {
 	const [file, setFile] = useState<File | null>(null);
 
 	const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = e => {
@@ -27,46 +34,42 @@ export const UploadModal: React.FC<IProps> = ({ setItems }) => {
 		fileReader.readAsText(file as File);
 	};
 
+	const closeModal = () => setIsOpen(false);
+
 	return (
-		<div className="modal" tabIndex={-1} id="upload-modal">
-			<div className="modal-dialog">
-				<div className="modal-content">
-					<div className="modal-header">
-						<h5 className="modal-title text-xl font-bold">Importar lista</h5>
-						<button type="button" className="p-1" data-bs-dismiss="modal">
+		<Dialog open={isOpen} onClose={closeModal} className="relative z-50">
+			<div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+			<div className="fixed inset-0 flex items-center justify-center p-4">
+				<Dialog.Panel className="mx-auto max-w-sm rounded bg-white p-4">
+					<div className="flex items-center justify-end">
+						<button type="button" onClick={closeModal} className="p-2">
 							<i className="fas fa-times"></i>
 						</button>
 					</div>
-					<div className="modal-body">
-						<form>
-							<input
-								className={`${inputStyles} border-b-0`}
-								type="file"
-								accept="application/json"
-								onChange={handleFileChange}
-							/>
-							<div className="flex items-center justify-end gap-2">
-								<button
-									type="button"
-									className={`${buttonDangerStyles}`}
-									data-bs-dismiss="modal"
-								>
-									Cerrar
-								</button>
-								<button
-									type="button"
-									className={`${buttonSuccessStyles}`}
-									form="import-list"
-									onClick={handleUploadFile}
-									data-bs-dismiss="modal"
-								>
-									Cargar
-								</button>
-							</div>
-						</form>
-					</div>
-				</div>
+					<Dialog.Title as="h2" className="text-center font-bold text-xl mb-4">
+						Agregar Producto
+					</Dialog.Title>
+					<form>
+						<input
+							className={`${inputStyles} border-b-0`}
+							type="file"
+							accept="application/json"
+							onChange={handleFileChange}
+						/>
+						<div className="flex items-center justify-end">
+							<button
+								type="button"
+								className={`${buttonSuccessStyles}`}
+								form="import-list"
+								onClick={handleUploadFile}
+								data-bs-dismiss="modal"
+							>
+								Cargar
+							</button>
+						</div>
+					</form>
+				</Dialog.Panel>
 			</div>
-		</div>
+		</Dialog>
 	);
 };
