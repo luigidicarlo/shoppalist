@@ -39,6 +39,7 @@ export const ItemModal: React.FC<IProps> = ({
 						onChange={onChange}
 						onSubmit={onSubmit}
 						resetForm={resetForm}
+						setIsOpen={setIsOpen}
 					/>
 				</Dialog.Panel>
 			</div>

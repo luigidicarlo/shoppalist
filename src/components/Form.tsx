@@ -10,6 +10,7 @@ interface IProps {
 	formState: IFormState;
 	onChange: React.ChangeEventHandler<HTMLInputElement>;
 	resetForm: () => void;
+	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Form: React.FC<IProps> = ({
@@ -17,7 +18,13 @@ export const Form: React.FC<IProps> = ({
 	formState,
 	onChange,
 	resetForm,
+	setIsOpen,
 }) => {
+	const closeModal = () => {
+		resetForm()
+		setIsOpen(false);
+	}
+
 	return (
 		<form onSubmit={onSubmit} className="bg-white p-4 rounded">
 			<input
@@ -49,18 +56,24 @@ export const Form: React.FC<IProps> = ({
 				onChange={onChange}
 				placeholder="Precio (Ejemplo: 999999.999)"
 			/>
-			<div className={`flex items-center justify-center mt-8${formState.itemToEdit && ' gap-4'}`}>
+			<div
+				className={`flex items-center justify-center mt-8${
+					formState.itemToEdit && ' gap-4'
+				}`}
+			>
 				{formState.itemToEdit && (
 					<button
 						type="button"
 						className={`${buttonDangerStyles} w-1/2`}
-						onClick={resetForm}
+						onClick={closeModal}
 					>
 						Cancelar
 					</button>
 				)}
 				<button
-					className={`${buttonSuccessStyles}${formState.itemToEdit && ' w-1/2'}`}
+					className={`${buttonSuccessStyles}${
+						formState.itemToEdit && ' w-1/2'
+					}`}
 					type="submit"
 					disabled={formState.name.length <= 0}
 				>
