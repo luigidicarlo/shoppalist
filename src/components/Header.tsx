@@ -1,8 +1,22 @@
 import swal from 'sweetalert';
+import { IItem } from '../interfaces';
 
-export const Header = ({ items, setItems }) => {
+interface IProps {
+	items: IItem[];
+	setItems: React.Dispatch<React.SetStateAction<IItem[]>>;
+}
+
+export const Header: React.FC<IProps> = ({ items, setItems }) => {
 	const exportList = () => {
 		const rawItems = localStorage.getItem('items');
+
+		if (!rawItems) {
+			return swal({
+				title: 'No hay datos para descargar',
+				text: 'Asegúrate de añadir productos a la lista antes de exportarla.',
+			});
+		}
+
 		const itemsAsObject = JSON.parse(rawItems);
 
 		if (!itemsAsObject || itemsAsObject.length <= 0) {
@@ -15,9 +29,16 @@ export const Header = ({ items, setItems }) => {
 		const generatedUrl = `data:text/json;charset=utf-8,${encodeURIComponent(
 			rawItems
 		)}`;
+		const currentDate = new Date();
+		const day = currentDate.getDate();
+		const month = currentDate.getMonth() + 1;
+		const year = currentDate.getFullYear();
 		const anchorElement = document.createElement('a');
 		anchorElement.setAttribute('href', generatedUrl);
-		anchorElement.setAttribute('download', `${Date.now()}-lista.json`);
+		anchorElement.setAttribute(
+			'download',
+			`shoppalist-${day}-${month}-${year}.json`
+		);
 		anchorElement.classList.add('hidden');
 		document.body.append(anchorElement);
 		anchorElement.click();
@@ -38,11 +59,11 @@ export const Header = ({ items, setItems }) => {
 	};
 
 	return (
-		<header className="bg-primary py-2 d-flex flex-wrap align-items-center justify-content-between text-white mb-3">
-			<h1 className="h3 m-0 ps-2">
+		<header className="bg-blue-500 py-2 flex flex-wrap items-center justify-between text-white mb-3">
+			<h1 className="h3 m-0 pl-2">
 				<i className="fas fa-shopping-cart"></i> Shoppalist
 			</h1>
-			<p className="text-right m-0 d-flex align-items-center">
+			<p className="text-right m-0 flex items-center">
 				<a
 					className="text-white mx-2"
 					style={{ textDecoration: 'none' }}
@@ -53,7 +74,7 @@ export const Header = ({ items, setItems }) => {
 				</a>
 				{items.length > 0 && (
 					<button
-						className="text-white mx-2 btn p-0"
+						className="text-white mx-2 p-1"
 						style={{ textDecoration: 'none' }}
 						title="Limpiar lista"
 						onClick={clearList}
@@ -62,7 +83,7 @@ export const Header = ({ items, setItems }) => {
 					</button>
 				)}
 				<button
-					className="text-white mx-2 btn p-0"
+					className="text-white mx-2 p-1"
 					style={{ textDecoration: 'none' }}
 					title="Exportar lista"
 					onClick={exportList}
@@ -70,7 +91,7 @@ export const Header = ({ items, setItems }) => {
 					<i className="fas fa-download"></i>
 				</button>
 				<button
-					className="text-white mx-2 btn p-0"
+					className="text-white mx-2 p-1"
 					style={{ textDecoration: 'none' }}
 					title="Importar lista"
 					data-bs-toggle="modal"
