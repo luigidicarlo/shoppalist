@@ -40,7 +40,7 @@ export const UploadModal: React.FC<IProps> = ({
 		<Dialog open={isOpen} onClose={closeModal} className="relative z-50">
 			<div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 			<div className="fixed inset-0 flex items-center justify-center p-4">
-				<Dialog.Panel className="mx-auto max-w-sm rounded bg-white p-4">
+				<Dialog.Panel className="mx-auto max-w-sm rounded-lg bg-white p-4 shadow-lg">
 					<div className="flex items-center justify-end">
 						<button type="button" onClick={closeModal} className="p-2">
 							<i className="fas fa-times"></i>

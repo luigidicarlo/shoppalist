@@ -1,13 +1,20 @@
 import swal from 'sweetalert';
+import { buttonPrimaryStyles } from '../constants/styles';
 import { IItem } from '../interfaces';
 
 interface IProps {
 	items: IItem[];
 	setItems: React.Dispatch<React.SetStateAction<IItem[]>>;
 	setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	openItemModal: React.MouseEventHandler;
 }
 
-export const Header: React.FC<IProps> = ({ items, setItems, setModalOpen }) => {
+export const Header: React.FC<IProps> = ({
+	items,
+	setItems,
+	setModalOpen,
+	openItemModal,
+}) => {
 	const exportList = () => {
 		const rawItems = localStorage.getItem('items');
 
@@ -62,22 +69,11 @@ export const Header: React.FC<IProps> = ({ items, setItems, setModalOpen }) => {
 	const openModal = () => setModalOpen(true);
 
 	return (
-		<header className="bg-blue-500 py-2 flex flex-wrap items-center justify-between text-white mb-3">
-			<h1 className="h3 m-0 pl-2">
-				<i className="fas fa-shopping-cart"></i> Shoppalist
-			</h1>
-			<p className="text-right m-0 flex items-center">
-				<a
-					className="text-white mx-2"
-					style={{ textDecoration: 'none' }}
-					href="mailto:lehuertad95@gmail.com?subject=Shoppalist"
-					title="Contáctame a través de lehuertad95@gmail.com"
-				>
-					<i className="fas fa-envelope"></i>
-				</a>
+		<header className="fixed bottom-0 bg-blue-500 py-2 flex flex-wrap items-center justify-between text-white w-full">
+			<p className="text-right m-0 flex items-center justify-center">
 				{items.length > 0 && (
 					<button
-						className="text-white mx-2 p-1"
+						className="text-red-600 mx-2 p-1 text-2xl"
 						style={{ textDecoration: 'none' }}
 						title="Limpiar lista"
 						onClick={clearList}
@@ -102,6 +98,18 @@ export const Header: React.FC<IProps> = ({ items, setItems, setModalOpen }) => {
 					<i className="fas fa-upload"></i>
 				</button>
 			</p>
+			<div className="flex items-center justify-end pr-2">
+				<button
+					type="button"
+					className={`${buttonPrimaryStyles
+						.replace('rounded', 'w-10 h-10 rounded-full')
+						.replace('bg-blue-500', 'bg-blue-800')} py-2 px-2 shadow flex items-center justify-center`}
+					onClick={openItemModal}
+					title="Agregar Producto"
+				>
+					<i className="fas fa-plus"></i>
+				</button>
+			</div>
 		</header>
 	);
 };

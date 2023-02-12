@@ -104,13 +104,8 @@ export const App = () => {
 
 	return (
 		<>
-			<Header
-				items={items}
-				setItems={setItems}
-				setModalOpen={setIsUploadModalOpen}
-			/>
+			<FilterForm items={filteredItems} filter={filter} setFilter={setFilter} />
 			<main className="container mx-auto max-w-sm px-2">
-				<FilterForm filter={filter} setFilter={setFilter} />
 				<Items
 					setIsItemModalOpen={setIsItemModalOpen}
 					items={filteredItems}
@@ -118,16 +113,12 @@ export const App = () => {
 					setFormState={setFormState}
 				/>
 			</main>
-			<div className="flex items-center justify-center my-6 fixed bottom-4 right-4">
-				<button
-					type="button"
-					className={`${buttonSuccessStyles} rounded-full py-2 px-2 shadow`}
-					onClick={openItemModal}
-					title="Agregar Producto"
-				>
-					<i className="fas fa-plus"></i>
-				</button>
-			</div>
+			<Header
+				items={items}
+				setItems={setItems}
+				setModalOpen={setIsUploadModalOpen}
+				openItemModal={openItemModal}
+			/>
 			<UploadModal
 				setItems={setItems}
 				isOpen={isUploadModalOpen}

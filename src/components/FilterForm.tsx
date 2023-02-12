@@ -1,11 +1,14 @@
 import { buttonDangerStyles, inputStyles } from '../constants/styles';
+import { IItem } from '../interfaces';
+import { getTotal } from '../utils/calculations';
 
 interface IProps {
+	items: IItem[];
 	filter: string;
 	setFilter: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const FilterForm: React.FC<IProps> = ({ filter, setFilter }) => {
+export const FilterForm: React.FC<IProps> = ({ filter, setFilter, items }) => {
 	const onChange: React.ChangeEventHandler<HTMLInputElement> = ({ target }) => {
 		setFilter(target.value);
 	};
@@ -15,23 +18,31 @@ export const FilterForm: React.FC<IProps> = ({ filter, setFilter }) => {
 	};
 
 	return (
-		<div className="flex items-end justify-center w-full mb-4 gap-2">
-			<input
-				type="text"
-				className={`${inputStyles} mb-0`}
-				placeholder="Buscar"
-				onChange={onChange}
-				value={filter}
-			/>
-			<button
-				type="button"
-				className={`${buttonDangerStyles} px-2 py-1 disabled:bg-red-300`}
-				disabled={!filter.length}
-				title="Reiniciar Búsqueda"
-				onClick={onClear}
-			>
-				<i className="fas fa-times"></i>
-			</button>
+		<div className="sticky top-0 left-0 p-2 bg-white">
+			<div className="flex items-end justify-center w-full mb-4 gap-2">
+				<input
+					type="text"
+					className={`${inputStyles} mb-0`}
+					placeholder="Buscar"
+					onChange={onChange}
+					value={filter}
+				/>
+				<button
+					type="button"
+					className={`${buttonDangerStyles} px-2 py-1 disabled:bg-red-300`}
+					disabled={!filter.length}
+					title="Reiniciar Búsqueda"
+					onClick={onClear}
+				>
+					<i className="fas fa-times"></i>
+				</button>
+			</div>
+			{items.length > 0 && (
+				<h2 className="text-lg text-center text-gray-700 select-none">
+					<span className="font-bold">Total:</span>{' '}
+					{Number(getTotal(items)).toFixed(3)}
+				</h2>
+			)}
 		</div>
 	);
 };

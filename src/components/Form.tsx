@@ -73,7 +73,7 @@ export const Form: React.FC<IProps> = ({
 				<button
 					className={`${buttonSuccessStyles}${
 						formState.itemToEdit && ' w-1/2'
-					}`}
+					} cursor-pointer disabled:bg-green-200`}
 					type="submit"
 					disabled={formState.name.length <= 0}
 				>

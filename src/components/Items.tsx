@@ -14,14 +14,6 @@ export const Items: React.FC<IProps> = ({
 	setFormState,
 	setIsItemModalOpen,
 }) => {
-	const getSubtotal = (item: IItem) => {
-		return Number(item.quantity) * Number(item.price);
-	};
-
-	const getTotal = () => {
-		return items.reduce((prev, curr) => Number((prev += getSubtotal(curr))), 0);
-	};
-
 	const onEdit = (item: IItem) => {
 		setIsItemModalOpen(true);
 		setFormState({
@@ -38,14 +30,6 @@ export const Items: React.FC<IProps> = ({
 				<li className="flex items-center justify-center">
 					<h2 className="text-2xl font-bold text-center">
 						No hay elementos para mostrar
-					</h2>
-				</li>
-			)}
-			{items.length > 0 && (
-				<li className="flex items-center justify-center gap-2">
-					<h2 className="text-lg">
-						<span className="font-bold">Total:</span>{' '}
-						{Number(getTotal()).toFixed(3)}
 					</h2>
 				</li>
 			)}

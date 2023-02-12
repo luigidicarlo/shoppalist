@@ -12,7 +12,7 @@ export const Item: React.FC<IProps> = ({ item, onEdit, onDelete }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const onToggleInfo = () => {
-		setIsOpen(!isOpen);
+		setIsOpen(open => !open);
 	};
 
 	const onEditItem = () => {
@@ -25,25 +25,36 @@ export const Item: React.FC<IProps> = ({ item, onEdit, onDelete }) => {
 
 	return (
 		<li className="shadow px-4 py-2 mb-4">
-			<div className="flex items-center justify-between" onClick={onToggleInfo}>
+			<div className="flex items-center justify-between">
 				<h3
-					className={`my-0 text-lg font-bold${
+					className={`my-0 text-lg select-none cursor-pointer w-full font-bold${
 						(item.price && Number(item.price) <= 0) ||
 						(item.quantity && Number(item.quantity) <= 0)
 							? ' text-red-500'
-							: ''
+							: ' text-gray-700'
 					}`}
+					onClick={onToggleInfo}
 				>
 					{item.name}
 				</h3>
-				<button
-					className="font-bold text-black"
-					title={`${isOpen ? 'Ocultar' : 'Mostrar'} detalles de ${item.name}`}
-				>
-					<i
-						className={`fas ${isOpen ? 'fa-chevron-up' : 'fa-chevron-down'}`}
-					></i>
-				</button>
+				<div className="flex items-center gap-4">
+					<button
+						className="font-bold text-gray-700 focus:outline-none"
+						type="button"
+						onClick={onEditItem}
+					>
+						<i className="fas fa-edit"></i>
+					</button>
+					<button
+						className="font-bold text-gray-700 focus:outline-none"
+						title={`${isOpen ? 'Ocultar' : 'Mostrar'} detalles de ${item.name}`}
+						onClick={onToggleInfo}
+					>
+						<i
+							className={`fas ${isOpen ? 'fa-chevron-up' : 'fa-chevron-down'}`}
+						></i>
+					</button>
+				</div>
 			</div>
 			{isOpen && (
 				<Fragment>
