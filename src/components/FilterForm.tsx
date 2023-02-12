@@ -1,14 +1,10 @@
 import { buttonDangerStyles, inputStyles } from '../constants/styles';
-import { IItem } from '../interfaces';
+import { useItemsContext } from '../hooks/useItemsContext';
 import { getTotal } from '../utils/calculations';
 
-interface IProps {
-	items: IItem[];
-	filter: string;
-	setFilter: React.Dispatch<React.SetStateAction<string>>;
-}
+export const FilterForm: React.FC = () => {
+	const { filter, setFilter, items } = useItemsContext();
 
-export const FilterForm: React.FC<IProps> = ({ filter, setFilter, items }) => {
 	const onChange: React.ChangeEventHandler<HTMLInputElement> = ({ target }) => {
 		setFilter(target.value);
 	};

@@ -1,20 +1,12 @@
 import swal from 'sweetalert';
 import { buttonPrimaryStyles } from '../constants/styles';
-import { IItem } from '../interfaces';
+import { useItemsContext } from '../hooks/useItemsContext';
+import { useModals } from '../hooks/useModals';
 
-interface IProps {
-	items: IItem[];
-	setItems: React.Dispatch<React.SetStateAction<IItem[]>>;
-	setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	openItemModal: React.MouseEventHandler;
-}
+export const Header: React.FC = () => {
+	const { items, setItems } = useItemsContext();
+	const { openItemModal, openUploadModal } = useModals();
 
-export const Header: React.FC<IProps> = ({
-	items,
-	setItems,
-	setModalOpen,
-	openItemModal,
-}) => {
 	const exportList = () => {
 		const rawItems = localStorage.getItem('items');
 
@@ -66,8 +58,6 @@ export const Header: React.FC<IProps> = ({
 		});
 	};
 
-	const openModal = () => setModalOpen(true);
-
 	return (
 		<header className="fixed bottom-0 bg-blue-500 py-2 flex flex-wrap items-center justify-between text-white w-full">
 			<p className="text-right m-0 flex items-center justify-center">
@@ -93,7 +83,7 @@ export const Header: React.FC<IProps> = ({
 					className="text-white mx-2 p-1"
 					style={{ textDecoration: 'none' }}
 					title="Importar lista"
-					onClick={openModal}
+					onClick={openUploadModal}
 				>
 					<i className="fas fa-upload"></i>
 				</button>
@@ -103,7 +93,10 @@ export const Header: React.FC<IProps> = ({
 					type="button"
 					className={`${buttonPrimaryStyles
 						.replace('rounded', 'w-10 h-10 rounded-full')
-						.replace('bg-blue-500', 'bg-blue-800')} py-2 px-2 shadow flex items-center justify-center`}
+						.replace(
+							'bg-blue-500',
+							'bg-blue-800'
+						)} py-2 px-2 shadow flex items-center justify-center`}
 					onClick={openItemModal}
 					title="Agregar Producto"
 				>

@@ -1,8 +1,10 @@
+import { useRef } from 'react';
 import {
 	buttonDangerStyles,
 	buttonSuccessStyles,
 	inputStyles,
 } from '../constants/styles';
+import { useForm } from '../hooks/useForm';
 import { IFormState } from '../interfaces';
 
 interface IProps {
@@ -10,30 +12,24 @@ interface IProps {
 	formState: IFormState;
 	onChange: React.ChangeEventHandler<HTMLInputElement>;
 	resetForm: () => void;
-	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	closeModal: () => void;
 }
 
 export const Form: React.FC<IProps> = ({
 	onSubmit,
 	formState,
+	closeModal,
 	onChange,
-	resetForm,
-	setIsOpen,
 }) => {
-	const closeModal = () => {
-		resetForm()
-		setIsOpen(false);
-	}
-
 	return (
 		<form onSubmit={onSubmit} className="bg-white p-4 rounded">
 			<input
 				className={`${inputStyles}`}
 				type="text"
 				name="name"
-				value={formState.name}
-				onChange={onChange}
 				placeholder="Nombre del artículo"
+				onChange={onChange}
+				value={formState.name}
 			/>
 			<input
 				type="number"
@@ -41,9 +37,9 @@ export const Form: React.FC<IProps> = ({
 				step="0.001"
 				name="quantity"
 				className={`${inputStyles}`}
-				value={formState.quantity}
-				onChange={onChange}
 				placeholder="Cantidad (Ejemplo: 99.999)"
+				onChange={onChange}
+				value={formState.quantity}
 			/>
 			<input
 				type="number"
@@ -52,9 +48,9 @@ export const Form: React.FC<IProps> = ({
 				step="0.001"
 				name="price"
 				className={`${inputStyles}`}
-				value={formState.price}
-				onChange={onChange}
 				placeholder="Precio (Ejemplo: 999999.999)"
+				onChange={onChange}
+				value={formState.price}
 			/>
 			<div
 				className={`flex items-center justify-center mt-8${

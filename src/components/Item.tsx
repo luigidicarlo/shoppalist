@@ -1,15 +1,16 @@
 import { Fragment, useState } from 'react';
 import { buttonDangerStyles, buttonPrimaryStyles } from '../constants/styles';
+import { useItemsContext } from '../hooks/useItemsContext';
 import { IItem } from '../interfaces';
 
 interface IProps {
 	item: IItem;
 	onEdit: (item: IItem) => void;
-	onDelete: (itemId: string) => void;
 }
 
-export const Item: React.FC<IProps> = ({ item, onEdit, onDelete }) => {
+export const Item: React.FC<IProps> = ({ item, onEdit }) => {
 	const [isOpen, setIsOpen] = useState(false);
+	const { deleteItem } = useItemsContext();
 
 	const onToggleInfo = () => {
 		setIsOpen(open => !open);
@@ -20,7 +21,7 @@ export const Item: React.FC<IProps> = ({ item, onEdit, onDelete }) => {
 	};
 
 	const onDeleteItem = () => {
-		onDelete(item.id);
+		deleteItem(item.id);
 	};
 
 	return (
@@ -85,7 +86,7 @@ export const Item: React.FC<IProps> = ({ item, onEdit, onDelete }) => {
 					<div className="flex items-center justify-center my-3 gap-4">
 						<button
 							type="button"
-							className={`${buttonPrimaryStyles} w-1/2`}
+							className={`${buttonPrimaryStyles} w-1/2 flex items-center justify-center gap-2`}
 							onClick={onEditItem}
 						>
 							<i className="fas fa-edit me-1"></i>
@@ -93,7 +94,7 @@ export const Item: React.FC<IProps> = ({ item, onEdit, onDelete }) => {
 						</button>
 						<button
 							type="button"
-							className={`${buttonDangerStyles} w-1/2`}
+							className={`${buttonDangerStyles} w-1/2 flex items-center justify-center gap-2`}
 							onClick={onDeleteItem}
 						>
 							<i className="fas fa-trash me-1"></i>

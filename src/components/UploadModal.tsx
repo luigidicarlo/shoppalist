@@ -4,20 +4,13 @@ import {
 	buttonSuccessStyles,
 	inputStyles,
 } from '../constants/styles';
-import { IItem } from '../interfaces';
 import { Dialog } from '@headlessui/react';
+import { useItemsContext } from '../hooks/useItemsContext';
+import { useModals } from '../hooks/useModals';
 
-interface IProps {
-	setItems: React.Dispatch<React.SetStateAction<IItem[]>>;
-	isOpen: boolean;
-	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export const UploadModal: React.FC<IProps> = ({
-	setItems,
-	isOpen,
-	setIsOpen,
-}) => {
+export const UploadModal: React.FC = () => {
+	const { setItems } = useItemsContext();
+	const { isUploadModalOpen: isOpen, closeUploadModal } = useModals();
 	const [file, setFile] = useState<File | null>(null);
 
 	const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = e => {
@@ -34,15 +27,13 @@ export const UploadModal: React.FC<IProps> = ({
 		fileReader.readAsText(file as File);
 	};
 
-	const closeModal = () => setIsOpen(false);
-
 	return (
-		<Dialog open={isOpen} onClose={closeModal} className="relative z-50">
+		<Dialog open={isOpen} onClose={closeUploadModal} className="relative z-50">
 			<div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 			<div className="fixed inset-0 flex items-center justify-center p-4">
 				<Dialog.Panel className="mx-auto max-w-sm rounded-lg bg-white p-4 shadow-lg">
 					<div className="flex items-center justify-end">
-						<button type="button" onClick={closeModal} className="p-2">
+						<button type="button" onClick={closeUploadModal} className="p-2">
 							<i className="fas fa-times"></i>
 						</button>
 					</div>
