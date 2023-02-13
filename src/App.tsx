@@ -61,7 +61,7 @@ export const App = () => {
 	return (
 		<>
 			<Items setFormState={setFormState} />
-				<ItemsTotal />
+			<ItemsTotal />
 			<FilterForm />
 			<Header />
 			<UploadModal />
