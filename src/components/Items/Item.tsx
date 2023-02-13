@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react';
-import { buttonDangerStyles, buttonPrimaryStyles } from '../constants/styles';
-import { useItemsContext } from '../hooks/useItemsContext';
-import { IItem } from '../interfaces';
+import { buttonDangerStyles, buttonPrimaryStyles } from '../../constants/styles';
+import { useItemsContext } from '../../hooks/useItemsContext';
+import { IItem } from '../../interfaces';
 
 interface IProps {
 	item: IItem;
@@ -32,7 +32,7 @@ export const Item: React.FC<IProps> = ({ item, onEdit }) => {
 						(item.price && Number(item.price) <= 0) ||
 						(item.quantity && Number(item.quantity) <= 0)
 							? ' text-red-500'
-							: ' text-gray-700'
+							: ' text-gray-600'
 					}`}
 					onClick={onToggleInfo}
 				>

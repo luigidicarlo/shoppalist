@@ -1,8 +1,7 @@
-import { IFormState } from '../interfaces';
+import { IFormState } from '../../interfaces';
 import { Dialog } from '@headlessui/react';
-import { Form } from './Form';
-import { useModals } from '../hooks/useModals';
-import React from 'react';
+import { Form } from '../Forms/Form';
+import { useModals } from '../../hooks/useModals';
 
 interface IProps {
 	formState: IFormState;

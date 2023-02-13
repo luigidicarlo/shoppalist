@@ -1,12 +1,8 @@
 import { useState } from 'react';
-import {
-	buttonDangerStyles,
-	buttonSuccessStyles,
-	inputStyles,
-} from '../constants/styles';
+import { buttonSuccessStyles, inputStyles } from '../../constants/styles';
 import { Dialog } from '@headlessui/react';
-import { useItemsContext } from '../hooks/useItemsContext';
-import { useModals } from '../hooks/useModals';
+import { useItemsContext } from '../../hooks/useItemsContext';
+import { useModals } from '../../hooks/useModals';
 
 export const UploadModal: React.FC = () => {
 	const { setItems } = useItemsContext();

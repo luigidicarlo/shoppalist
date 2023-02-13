@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import { IModalsContext } from '../interfaces';
+import { IModalsContext } from '../../interfaces';
 
 interface IProps {
 	children: React.ReactNode;

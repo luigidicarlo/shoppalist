@@ -1,11 +1,28 @@
+import { Popover } from '@headlessui/react';
 import swal from 'sweetalert';
-import { buttonPrimaryStyles } from '../constants/styles';
-import { useItemsContext } from '../hooks/useItemsContext';
-import { useModals } from '../hooks/useModals';
+import { useItemsContext } from '../../hooks/useItemsContext';
+import { useModals } from '../../hooks/useModals';
+import { IItem } from '../../interfaces';
 
-export const Header: React.FC = () => {
+interface IProps {}
+
+export const HeaderPopover: React.FC<IProps> = ({}) => {
 	const { items, setItems } = useItemsContext();
-	const { openItemModal, openUploadModal } = useModals();
+	const { openUploadModal } = useModals();
+
+	const clearList = () => {
+		swal({
+			title: 'Limpiar lista',
+			text: '¿Deseas limpiar la lista actual? Perderás todos los productos registrados.',
+			buttons: ['Cancelar', 'Limpiar'],
+			dangerMode: true,
+		}).then(confirmed => {
+			if (!confirmed) {
+				return;
+			}
+			setItems([]);
+		});
+	};
 
 	const exportList = () => {
 		const rawItems = localStorage.getItem('items');
@@ -45,22 +62,13 @@ export const Header: React.FC = () => {
 		anchorElement.remove();
 	};
 
-	const clearList = () => {
-		swal({
-			title: 'Limpiar lista',
-			text: '¿Deseas limpiar la lista actual? Perderás todos los productos registrados.',
-			buttons: ['Cancelar', 'Limpiar'],
-			dangerMode: true,
-		}).then(confirmed => {
-			if (!confirmed) return;
-
-			setItems([]);
-		});
-	};
-
 	return (
-		<header className="fixed bottom-0 bg-blue-500 py-2 flex flex-wrap items-center justify-between text-white w-full">
-			<p className="text-right m-0 flex items-center justify-center">
+		<Popover className="relative">
+			<Popover.Button title="Menú" className="flex items-center justify-center w-10 h-6 focus:outline-none">
+				<i className="fas fa-ellipsis-v"></i>
+			</Popover.Button>
+
+			<Popover.Panel className="absolute bottom-12 z-10 bg-white p-2 shadow-lg flex items-center justify-center gap-2">
 				{items.length > 0 && (
 					<button
 						className="text-red-600 mx-2 p-1 text-2xl"
@@ -72,7 +80,7 @@ export const Header: React.FC = () => {
 					</button>
 				)}
 				<button
-					className="text-white mx-2 p-1"
+					className="text-gray-700 mx-2 p-1"
 					style={{ textDecoration: 'none' }}
 					title="Exportar lista"
 					onClick={exportList}
@@ -80,29 +88,14 @@ export const Header: React.FC = () => {
 					<i className="fas fa-download"></i>
 				</button>
 				<button
-					className="text-white mx-2 p-1"
+					className="text-gray-700 mx-2 p-1"
 					style={{ textDecoration: 'none' }}
 					title="Importar lista"
 					onClick={openUploadModal}
 				>
 					<i className="fas fa-upload"></i>
 				</button>
-			</p>
-			<div className="flex items-center justify-end pr-2">
-				<button
-					type="button"
-					className={`${buttonPrimaryStyles
-						.replace('rounded', 'w-10 h-10 rounded-full')
-						.replace(
-							'bg-blue-500',
-							'bg-blue-800'
-						)} py-2 px-2 shadow flex items-center justify-center`}
-					onClick={openItemModal}
-					title="Agregar Producto"
-				>
-					<i className="fas fa-plus"></i>
-				</button>
-			</div>
-		</header>
+			</Popover.Panel>
+		</Popover>
 	);
 };

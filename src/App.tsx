@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
 import { v4 } from 'uuid';
-
-import { Items } from './components/Items';
-import { Header } from './components/Header';
-import { FilterForm } from './components/FilterForm';
-import { UploadModal } from './components/UploadModal';
-import { IFormState, IItem } from './interfaces';
-import { ItemModal } from './components/ItemModal';
+import { Items } from './components/Items/Items';
+import { Header } from './components/Header/Header';
+import { FilterForm } from './components/Forms/FilterForm';
+import { UploadModal } from './components/Modals/UploadModal';
+import { ItemModal } from './components/Modals/ItemModal';
 import { useItemsContext } from './hooks/useItemsContext';
 import { useForm } from './hooks/useForm';
 import { useModals } from './hooks/useModals';
+import { ItemsTotal } from './components/Items/ItemsTotal';
 
 const defaultState = {
 	name: '',
@@ -61,8 +60,9 @@ export const App = () => {
 
 	return (
 		<>
-			<FilterForm />
 			<Items setFormState={setFormState} />
+				<ItemsTotal />
+			<FilterForm />
 			<Header />
 			<UploadModal />
 			<ItemModal

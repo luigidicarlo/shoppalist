@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { ItemsContext } from '../components/ItemsContext';
-import { ModalsContext } from '../components/ModalsContext';
+import { ItemsContext } from '../components/Contexts/ItemsContext';
+import { ModalsContext } from '../components/Contexts/ModalsContext';
 
 export function useModals(resetForm?: () => void) {
 	const {

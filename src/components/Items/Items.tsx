@@ -1,6 +1,6 @@
-import { useItemsContext } from '../hooks/useItemsContext';
-import { useModals } from '../hooks/useModals';
-import { IFormState, IItem } from '../interfaces';
+import { useItemsContext } from '../../hooks/useItemsContext';
+import { useModals } from '../../hooks/useModals';
+import { IFormState, IItem } from '../../interfaces';
 import { Item } from './Item';
 
 interface IProps {

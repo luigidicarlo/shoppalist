@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import { IItem, IItemsContext } from '../interfaces';
+import { IItem, IItemsContext } from '../../interfaces';
 
 export const ItemsContext = createContext<IItemsContext>({
 	items: [],

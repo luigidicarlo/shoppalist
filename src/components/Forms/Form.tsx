@@ -1,11 +1,11 @@
-import { useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import {
 	buttonDangerStyles,
 	buttonSuccessStyles,
 	inputStyles,
-} from '../constants/styles';
-import { useForm } from '../hooks/useForm';
-import { IFormState } from '../interfaces';
+} from '../../constants/styles';
+import { useForm } from '../../hooks/useForm';
+import { IFormState } from '../../interfaces';
 
 interface IProps {
 	onSubmit: React.FormEventHandler;
@@ -21,15 +21,23 @@ export const Form: React.FC<IProps> = ({
 	closeModal,
 	onChange,
 }) => {
+	const nameInputRef = useRef<HTMLInputElement>(null);
+
+	useLayoutEffect(() => {
+		nameInputRef.current && nameInputRef.current.focus();
+	}, []);
+
 	return (
 		<form onSubmit={onSubmit} className="bg-white p-4 rounded">
 			<input
+				ref={nameInputRef}
 				className={`${inputStyles}`}
 				type="text"
 				name="name"
 				placeholder="Nombre del artículo"
 				onChange={onChange}
 				value={formState.name}
+				maxLength={25}
 			/>
 			<input
 				type="number"

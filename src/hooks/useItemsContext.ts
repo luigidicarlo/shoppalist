@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import swal from 'sweetalert';
-import { ItemsContext } from '../components/ItemsContext';
+import { ItemsContext } from '../components/Contexts/ItemsContext';
 import { IItem } from '../interfaces';
 
 export function useItemsContext() {
