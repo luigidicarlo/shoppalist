@@ -22,7 +22,7 @@ export const Items: React.FC<IProps> = ({ setFormState }) => {
 	};
 
 	return (
-		<main className={`container mx-auto max-w-sm pb-40 px-2${filteredItems.length > 0 && ' pt-8'}`}>
+		<main className="container mx-auto max-w-sm pb-40 px-2 pt-8">
 			<ul className="mt-8 mb-4 rounded">
 				{!filteredItems.length && (
 					<li className="flex items-center justify-center">

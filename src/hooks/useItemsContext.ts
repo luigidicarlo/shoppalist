@@ -16,7 +16,7 @@ export function useItemsContext() {
 	useEffect(() => {
 		if (filter.length > 0) {
 			const filteredElements = items.filter((item: IItem) =>
-				item.name.toLowerCase().includes(filter.toLowerCase())
+				item.name.toLowerCase().includes(filter.toLowerCase().trim())
 			);
 			setFilteredItems(filteredElements);
 		} else {

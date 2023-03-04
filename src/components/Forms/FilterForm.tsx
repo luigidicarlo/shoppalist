@@ -8,16 +8,27 @@ export const FilterForm: React.FC = () => {
 		setFilter(target.value);
 	};
 
+	const resetFilter = () => {
+		setFilter('');
+	};
+
 	return (
 		<div className="flex items-center justify-center">
 			<div className="fixed bottom-12 p-4 bg-white w-full shadow max-w-sm border-t border-gray-100">
-				<input
-					type="search"
-					className={`${inputStyles} mb-0 text-lg text-black`}
-					placeholder="Buscar"
-					onChange={onChange}
-					value={filter}
-				/>
+				<div className="flex items-center w-full gap-2">
+					<input
+						type="text"
+						className={`${inputStyles} mb-0 text-lg text-black rounded-none`}
+						placeholder="Buscar"
+						onChange={onChange}
+						value={filter}
+					/>
+					{filter.length > 0 && (
+						<button type="button" onClick={resetFilter}>
+							<i className="fas fa-times" />
+						</button>
+					)}
+				</div>
 			</div>
 		</div>
 	);
