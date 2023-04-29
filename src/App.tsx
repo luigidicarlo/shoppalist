@@ -60,7 +60,7 @@ export const App = () => {
 
 	return (
 		<>
-			<main className="flex flex-col items-stretch min-h-screen">
+			<main className="flex flex-col items-stretch min-h-screen max-h-screen">
 				<ItemsTotal />
 				<Items setFormState={setFormState} />
 				<FilterForm />

@@ -22,7 +22,7 @@ export const Items: React.FC<IProps> = ({ setFormState }) => {
 	};
 
 	return (
-		<ul className="rounded flex-1 pt-4">
+		<ul className="rounded flex-1 pt-4 overflow-y-scroll">
 			{!filteredItems.length && (
 				<li className="flex items-center justify-center first:pt-4">
 					<h2 className="text-2xl font-bold text-center">
