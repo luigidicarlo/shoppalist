@@ -14,3 +14,10 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 		</ItemsProvider>
 	</React.StrictMode>
 );
+
+const appHeight = () => {
+	const doc = document.documentElement;
+	doc.style.setProperty('--app-height', `${window.innerHeight}px`);
+};
+window.addEventListener('resize', appHeight);
+appHeight();
