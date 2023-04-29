@@ -62,8 +62,8 @@ export const App = () => {
 		<>
 			<main className="flex flex-col items-stretch h-full max-h-screen">
 				<ItemsTotal />
-				<Items setFormState={setFormState} />
 				<FilterForm />
+				<Items setFormState={setFormState} />
 				<Header />
 			</main>
 			<UploadModal />
