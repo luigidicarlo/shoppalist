@@ -14,7 +14,7 @@ export const FilterForm: React.FC = () => {
 
 	return (
 		<div className="flex items-center justify-center">
-			<div className="fixed bottom-12 p-4 bg-white w-full shadow max-w-sm border-t border-gray-100">
+			<div className="bottom-12 p-4 bg-white w-full max-w-sm">
 				<div className="flex items-center w-full gap-2">
 					<input
 						type="text"

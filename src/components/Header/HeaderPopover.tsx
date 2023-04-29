@@ -15,7 +15,7 @@ export const HeaderPopover: React.FC<IProps> = ({}) => {
 			title: 'Limpiar lista',
 			text: '¿Deseas limpiar la lista actual? Perderás todos los productos registrados.',
 			buttons: ['Cancelar', 'Limpiar'],
-			dangerMode: true,
+			dangerMode: true
 		}).then(confirmed => {
 			if (!confirmed) {
 				return;
@@ -30,7 +30,7 @@ export const HeaderPopover: React.FC<IProps> = ({}) => {
 		if (!rawItems) {
 			return swal({
 				title: 'No hay datos para descargar',
-				text: 'Asegúrate de añadir productos a la lista antes de exportarla.',
+				text: 'Asegúrate de añadir productos a la lista antes de exportarla.'
 			});
 		}
 
@@ -39,7 +39,7 @@ export const HeaderPopover: React.FC<IProps> = ({}) => {
 		if (!itemsAsObject || itemsAsObject.length <= 0) {
 			return swal({
 				title: 'No hay datos para descargar',
-				text: 'Asegúrate de añadir productos a la lista antes de exportarla.',
+				text: 'Asegúrate de añadir productos a la lista antes de exportarla.'
 			});
 		}
 
@@ -63,37 +63,43 @@ export const HeaderPopover: React.FC<IProps> = ({}) => {
 	};
 
 	return (
-		<Popover className="relative">
-			<Popover.Button title="Menú" className="flex items-center justify-center w-10 h-6 focus:outline-none">
+		<Popover className="relative w-1/2">
+			<Popover.Button
+				title="Menú"
+				className="flex items-center justify-center w-10 h-6 focus:outline-none"
+			>
 				<i className="fas fa-ellipsis-v"></i>
 			</Popover.Button>
 
-			<Popover.Panel className="absolute bottom-12 z-10 bg-white p-2 shadow-lg flex items-center justify-center gap-2">
+			<Popover.Panel className="absolute bottom-12 z-10 bg-white p-2 shadow-lg flex flex-col items-start justify-center gap-2 w-full">
 				{items.length > 0 && (
 					<button
-						className="text-red-600 mx-2 p-1 text-2xl"
+						className="text-red-600 mx-2 p-1 text-2xl flex items-center gap-2"
 						style={{ textDecoration: 'none' }}
 						title="Limpiar lista"
 						onClick={clearList}
 					>
-						<i className="fas fa-times"></i>
+						<i className="fas fa-times"></i>{' '}
+						<span className="text-base">Borrar Lista</span>
 					</button>
 				)}
 				<button
-					className="text-gray-700 mx-2 p-1"
+					className="text-gray-700 mx-2 p-1 flex items-center gap-2"
 					style={{ textDecoration: 'none' }}
 					title="Exportar lista"
 					onClick={exportList}
 				>
 					<i className="fas fa-download"></i>
+					<span className="text-base">Descargar Lista</span>
 				</button>
 				<button
-					className="text-gray-700 mx-2 p-1"
+					className="text-gray-700 mx-2 p-1 flex items-center gap-2"
 					style={{ textDecoration: 'none' }}
 					title="Importar lista"
 					onClick={openUploadModal}
 				>
 					<i className="fas fa-upload"></i>
+					<span className="text-base">Cargar Lista</span>
 				</button>
 			</Popover.Panel>
 		</Popover>

@@ -14,7 +14,7 @@ const defaultState = {
 	name: '',
 	quantity: '',
 	price: '',
-	itemToEdit: undefined,
+	itemToEdit: undefined
 };
 
 export const App = () => {
@@ -36,14 +36,14 @@ export const App = () => {
 				id: itemToEdit.id,
 				name: name.trim(),
 				quantity: String(Number(quantity)),
-				price: String(Number(price)),
+				price: String(Number(price))
 			});
 		} else {
 			const newItem = {
 				id: v4(),
 				name: name.trim(),
 				quantity: String(Number(quantity)),
-				price: String(Number(price)),
+				price: String(Number(price))
 			};
 			addItem(newItem);
 		}
@@ -54,16 +54,18 @@ export const App = () => {
 	const onChange: React.ChangeEventHandler<HTMLInputElement> = e => {
 		setFormState({
 			...formState,
-			[e.target.name]: e.target.value,
+			[e.target.name]: e.target.value
 		});
 	};
 
 	return (
 		<>
-			<Items setFormState={setFormState} />
-			<ItemsTotal />
-			<FilterForm />
-			<Header />
+			<main className="flex flex-col items-stretch min-h-screen">
+				<ItemsTotal />
+				<Items setFormState={setFormState} />
+				<FilterForm />
+				<Header />
+			</main>
 			<UploadModal />
 			<ItemModal
 				formState={formState}

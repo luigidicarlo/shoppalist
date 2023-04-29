@@ -9,7 +9,7 @@ export const Header: React.FC = () => {
 	const { openItemModal, openUploadModal } = useModals();
 
 	return (
-		<header className="fixed bottom-0 bg-blue-500 py-2 w-full">
+		<header className="bg-blue-500 py-2 w-full">
 			<div className="flex flex-wrap items-center justify-between text-white max-w-sm mx-auto">
 				<HeaderPopover />
 				<div className="flex items-center justify-end pr-2">

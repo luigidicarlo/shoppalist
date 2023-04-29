@@ -25,7 +25,7 @@ export const Item: React.FC<IProps> = ({ item, onEdit }) => {
 	};
 
 	return (
-		<li className="shadow px-4 py-2 mb-4">
+		<li className="shadow-sm inset px-4 py-2 mb-4">
 			<div className="flex items-center justify-between">
 				<h3
 					className={`my-0 text-lg select-none cursor-pointer w-full font-bold${

@@ -17,25 +17,23 @@ export const Items: React.FC<IProps> = ({ setFormState }) => {
 			name: item.name,
 			quantity: Number(item.quantity) === 0 ? '' : item.quantity,
 			price: Number(item.price) === 0 ? '' : item.price,
-			itemToEdit: item,
+			itemToEdit: item
 		});
 	};
 
 	return (
-		<main className="container mx-auto max-w-sm pb-40 px-2 pt-8">
-			<ul className="mt-8 mb-4 rounded">
-				{!filteredItems.length && (
-					<li className="flex items-center justify-center">
-						<h2 className="text-2xl font-bold text-center">
-							No hay elementos para mostrar
-						</h2>
-					</li>
-				)}
-				{filteredItems.length > 0 &&
-					filteredItems.map(item => (
-						<Item item={item} key={item.id} onEdit={onEdit} />
-					))}
-			</ul>
-		</main>
+		<ul className="rounded flex-1 pt-4">
+			{!filteredItems.length && (
+				<li className="flex items-center justify-center first:pt-4">
+					<h2 className="text-2xl font-bold text-center">
+						No hay elementos para mostrar
+					</h2>
+				</li>
+			)}
+			{filteredItems.length > 0 &&
+				filteredItems.map(item => (
+					<Item item={item} key={item.id} onEdit={onEdit} />
+				))}
+		</ul>
 	);
 };
