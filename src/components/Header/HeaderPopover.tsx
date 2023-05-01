@@ -71,7 +71,7 @@ export const HeaderPopover: React.FC<IProps> = ({}) => {
 				<i className="fas fa-ellipsis-v"></i>
 			</Popover.Button>
 
-			<Popover.Panel className="absolute bottom-12 z-10 bg-white p-2 shadow-lg flex flex-col items-start justify-center gap-2 w-full">
+			<Popover.Panel className="absolute top-12 left-4 z-10 bg-white p-2 shadow-lg flex flex-col items-start justify-center gap-2 w-full">
 				{items.length > 0 && (
 					<button
 						className="text-red-600 mx-2 p-1 text-2xl flex items-center gap-2"

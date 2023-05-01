@@ -36,14 +36,14 @@ export const App = () => {
 			updateItem(itemToEdit.id, {
 				id: itemToEdit.id,
 				name: name.trim(),
-				quantity: String(Number(quantity)),
+				quantity: Number(quantity) ? String(Number(quantity)) : '1',
 				price: String(Number(price)),
 			});
 		} else {
 			const newItem = {
 				id: v4(),
 				name: name.trim(),
-				quantity: String(Number(quantity)),
+				quantity: Number(quantity) ? String(Number(quantity)) : '1',
 				price: String(Number(price)),
 			};
 			addItem(newItem);
@@ -65,9 +65,11 @@ export const App = () => {
 				<div className="fixed w-full">
 					<Header />
 					<FilterForm />
+					<ItemsTotal />
 				</div>
-				<ItemsTotal />
-				<Items setFormState={setFormState} />
+				<div className="pt-36">
+					<Items setFormState={setFormState} />
+				</div>
 				<AddItemButton />
 			</main>
 			<UploadModal />

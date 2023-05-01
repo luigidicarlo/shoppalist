@@ -18,6 +18,7 @@ export const UploadModal: React.FC = () => {
 		fileReader.onload = e => {
 			if (e.target) {
 				setItems(JSON.parse(String(e.target.result)));
+				closeUploadModal();
 			}
 		};
 		fileReader.readAsText(file as File);
