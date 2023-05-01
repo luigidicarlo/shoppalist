@@ -9,12 +9,13 @@ import { useItemsContext } from './hooks/useItemsContext';
 import { useForm } from './hooks/useForm';
 import { useModals } from './hooks/useModals';
 import { ItemsTotal } from './components/Items/ItemsTotal';
+import { AddItemButton } from './components/Items/AddItemButton';
 
 const defaultState = {
 	name: '',
 	quantity: '',
 	price: '',
-	itemToEdit: undefined
+	itemToEdit: undefined,
 };
 
 export const App = () => {
@@ -36,14 +37,14 @@ export const App = () => {
 				id: itemToEdit.id,
 				name: name.trim(),
 				quantity: String(Number(quantity)),
-				price: String(Number(price))
+				price: String(Number(price)),
 			});
 		} else {
 			const newItem = {
 				id: v4(),
 				name: name.trim(),
 				quantity: String(Number(quantity)),
-				price: String(Number(price))
+				price: String(Number(price)),
 			};
 			addItem(newItem);
 		}
@@ -54,17 +55,20 @@ export const App = () => {
 	const onChange: React.ChangeEventHandler<HTMLInputElement> = e => {
 		setFormState({
 			...formState,
-			[e.target.name]: e.target.value
+			[e.target.name]: e.target.value,
 		});
 	};
 
 	return (
 		<>
-			<main className="flex flex-col items-stretch h-screen">
+			<main className="flex flex-col items-stretch">
+				<div className="fixed w-full">
+					<Header />
+					<FilterForm />
+				</div>
 				<ItemsTotal />
-				<FilterForm />
 				<Items setFormState={setFormState} />
-				<Header />
+				<AddItemButton />
 			</main>
 			<UploadModal />
 			<ItemModal
