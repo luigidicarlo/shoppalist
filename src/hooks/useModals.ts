@@ -1,32 +1,59 @@
 import { useContext } from 'react';
-import { ItemsContext } from '../components/Contexts/ItemsContext';
+import { ProductsContext } from '../components/Contexts/ItemsContext';
 import { ModalsContext } from '../components/Contexts/ModalsContext';
+import { useProductsContext } from './useItemsContext';
 
-export function useModals(resetForm?: () => void) {
-	const {
-		isItemModalOpen,
-		isUploadModalOpen,
-		setIsItemModalOpen,
-		setIsUploadModalOpen,
-	} = useContext(ModalsContext);
+export function useModals() {
+  const { selectedProduct, setSelectedProduct } = useProductsContext();
+  const {
+    isProductModalOpen,
+    isUploadModalOpen,
+    isCategoriesModalOpen,
+    setIsProductModalOpen,
+    setIsUploadModalOpen,
+    setIsCategoriesModalOpen,
+  } = useContext(ModalsContext);
 
-	const openItemModal = () => setIsItemModalOpen(true);
+  const openProductModal = () => {
+    setIsUploadModalOpen(false);
+    setIsCategoriesModalOpen(false);
+    setIsProductModalOpen(true);
+  };
 
-	const closeItemModal = () => {
-		resetForm && resetForm();
-		setIsItemModalOpen(false);
-	};
+  const closeProductModal = () => {
+    if (selectedProduct) {
+      setSelectedProduct(null);
+    }
+    setIsProductModalOpen(false);
+  };
 
-	const openUploadModal = () => setIsUploadModalOpen(true);
+  const openUploadModal = () => {
+    setIsCategoriesModalOpen(false);
+    setIsProductModalOpen(false);
+    setIsUploadModalOpen(true);
+  };
 
-	const closeUploadModal = () => setIsUploadModalOpen(false);
+  const closeUploadModal = () => setIsUploadModalOpen(false);
 
-	return {
-		isItemModalOpen,
-		isUploadModalOpen,
-		openItemModal,
-		closeItemModal,
-		openUploadModal,
-		closeUploadModal,
-	};
+  const openCategoriesModal = () => {
+    closeUploadModal();
+    closeProductModal();
+    setIsCategoriesModalOpen(true);
+  };
+
+  const closeCategoriesModal = () => {
+    setIsCategoriesModalOpen(false);
+  };
+
+  return {
+    isProductModalOpen,
+    isUploadModalOpen,
+    isCategoriesModalOpen,
+    openProductModal,
+    closeProductModal,
+    openUploadModal,
+    closeUploadModal,
+    openCategoriesModal,
+    closeCategoriesModal,
+  };
 }

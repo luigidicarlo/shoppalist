@@ -1,31 +1,36 @@
-import React, { createContext, useState } from 'react';
-import { IModalsContext } from '../../interfaces';
+import React, { createContext, useState } from "react";
+import { ModalsContextValue } from "../../types/contexts/modals-context-value";
 
 interface IProps {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }
 
-export const ModalsContext = createContext<IModalsContext>({
-	isItemModalOpen: false,
-	isUploadModalOpen: false,
-	setIsItemModalOpen: () => {},
-	setIsUploadModalOpen: () => {},
+export const ModalsContext = createContext<ModalsContextValue>({
+  isProductModalOpen: false,
+  isUploadModalOpen: false,
+  isCategoriesModalOpen: false,
+  setIsProductModalOpen: () => {},
+  setIsUploadModalOpen: () => {},
+  setIsCategoriesModalOpen: () => {},
 });
 
 export const ModalsProvider: React.FC<IProps> = ({ children }) => {
-	const [isItemModalOpen, setIsItemModalOpen] = useState(false);
-	const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [isCategoriesModalOpen, setIsCategoriesModalOpen] = useState(false);
 
-	return (
-		<ModalsContext.Provider
-			value={{
-				isItemModalOpen,
-				setIsItemModalOpen,
-				isUploadModalOpen,
-				setIsUploadModalOpen,
-			}}
-		>
-			{children}
-		</ModalsContext.Provider>
-	);
+  return (
+    <ModalsContext.Provider
+      value={{
+        isProductModalOpen,
+        setIsProductModalOpen,
+        isUploadModalOpen,
+        setIsUploadModalOpen,
+        isCategoriesModalOpen,
+        setIsCategoriesModalOpen,
+      }}
+    >
+      {children}
+    </ModalsContext.Provider>
+  );
 };

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { buttonSuccessStyles, inputStyles } from '../../constants/styles';
 import { Dialog } from '@headlessui/react';
-import { useItemsContext } from '../../hooks/useItemsContext';
+import { useProductsContext } from '../../hooks/useItemsContext';
 import { useModals } from '../../hooks/useModals';
 
 export const UploadModal: React.FC = () => {
-	const { setItems } = useItemsContext();
+	const { setProducts: setItems } = useProductsContext();
 	const { isUploadModalOpen: isOpen, closeUploadModal } = useModals();
 	const [file, setFile] = useState<File | null>(null);
 

@@ -1,8 +1,8 @@
-import { useItemsContext } from '../../hooks/useItemsContext';
+import { useProductsContext } from '../../hooks/useItemsContext';
 import { getTotal } from '../../utils/calculations';
 
-export const ItemsTotal: React.FC = () => {
-	const { filteredItems } = useItemsContext();
+export const ProductsTotal: React.FC = () => {
+	const { filteredProducts: filteredItems } = useProductsContext();
 
 	return (
 		<>

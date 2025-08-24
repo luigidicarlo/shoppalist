@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { IFormState } from '../interfaces';
+import { ProductFormState } from '../types/forms/product-form-state';
 
-export function useForm(defaultValue: IFormState) {
+export function useForm(defaultValue: ProductFormState) {
 	const [formState, setFormState] = useState(defaultValue);
 
 	const resetForm = () => {

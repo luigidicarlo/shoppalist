@@ -1,8 +1,8 @@
 import { inputStyles } from '../../constants/styles';
-import { useItemsContext } from '../../hooks/useItemsContext';
+import { useProductsContext } from '../../hooks/useItemsContext';
 
 export const FilterForm: React.FC = () => {
-	const { filter, setFilter } = useItemsContext();
+	const { filter, setFilter } = useProductsContext();
 
 	const onChange: React.ChangeEventHandler<HTMLInputElement> = ({ target }) => {
 		setFilter(target.value);

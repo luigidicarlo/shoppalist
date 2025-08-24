@@ -1,11 +1,11 @@
 export const inputStyles =
-	'block border-b border-gray-300 rounded mb-4 text-gray-700 w-full focus:outline-none';
+  'block border-b border-gray-300 rounded text-gray-700 w-full rounded-b-none focus:outline-none';
 
 export const buttonDangerStyles =
-	'block bg-red-500 text-white px-4 py-2 rounded cursor-pointer';
+  'block bg-red-500 text-white px-4 py-2 rounded cursor-pointer';
 
 export const buttonSuccessStyles =
-	'block bg-green-500 text-white px-4 py-2 rounded cursor-pointer';
+  'block bg-green-500 text-white px-4 py-2 rounded cursor-pointer';
 
 export const buttonPrimaryStyles =
-	'block bg-blue-500 text-white px-4 py-2 rounded cursor-pointer';
+  'block bg-blue-500 text-white px-4 py-2 rounded cursor-pointer';
